@@ -104,6 +104,8 @@ El proyecto incluye 4 archivos de entrada ubicados en la carpeta inputs/:
 
 - C – Lenguaje de implementación base
 
+---
+
 ## ✨ Aprendizaje
 
 Con este proyecto aprendí a:
@@ -115,6 +117,8 @@ Con este proyecto aprendí a:
 - Gestionar errores y controlar la recuperación tras fallos léxicos o sintácticos.
 
 - Automatizar el proceso de compilación mediante Makefiles.
+
+---
 
 ## 👥 Autores
 

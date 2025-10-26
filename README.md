@@ -19,12 +19,12 @@ El objetivo es validar la estructura y las restricciones de modelos UML escritos
 
 ## 🧱 Estructura del proyecto
 
-📂 uml-ocl-parser/
-┣ 📜 ocl.l # Analizador léxico (Flex)
-┣ 📜 ocl.y # Analizador sintáctico (Bison)
-┣ 📜 Makefile # Compilación y limpieza automática
-┣ 📂 inputs/ # Archivos de prueba (.ocl)
-┗ 📘 README.md # Documentación del proyecto
+    📂 uml-ocl-parser/
+     ┣ 📜 ocl.l                     # Analizador léxico (Flex)
+     ┣ 📜 ocl.y                     # Analizador sintáctico (Bison)
+     ┣ 📜 Makefile                  # Compilación y limpieza automática
+     ┣ 📂 inputs/                   # Archivos de prueba (.ocl)
+     ┗ 📘 README.md                 # Documentación del proyecto
 
 ---
 

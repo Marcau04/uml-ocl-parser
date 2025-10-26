@@ -112,7 +112,7 @@ Con este proyecto aprendí a:
 
 - Automatizar el proceso de compilación mediante Makefiles.
 
-👥 Autores
+## 👥 Autores
 
 - Marcos Alonso Ulloa (@Marcau04)
 - Marcos Cámara Vicente

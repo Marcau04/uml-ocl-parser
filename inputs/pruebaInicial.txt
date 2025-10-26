@@ -1,0 +1,88 @@
+context Calificacion
+    inv: self.apellidos = self.apellidos.toUpperCase()
+
+context Calificacion
+    inv: self.teoria >= 0 and self.teoria <= 10
+    inv: self.practica >= 0 and self.practica <= 10
+    inv: self.resultado() >= 0 and self.resultado() <= 10
+
+context Calificacion
+    inv: self.resultado() = (self.teoria + self.practica)/2
+
+context Escritor
+    inv: self.alias -> notEmpty() implies
+    self.alias -> includes(self.nombre)
+
+context Escritor::primerContacto
+    pre: self.email -> notEmpty()
+    post: self.primerContacto = self.email -> first()
+
+context Alumno::calificacionGlobal
+    pre: self.calificacionMotivacion -> max() >= 5
+       and self.calificacionParcial -> count() =2
+    post: self.calificacionGlobal = 2*(self.calificacionParcial -> at(1))
+
+context Aeropuerto
+    inv: self.vuelo.select(v: Vuelo | v.duracion > 3) -> notEmpty()
+    inv: self.vuelo.reject(duracion <= 3) -> notEmpty()
+
+context Aeropuerto
+    inv: self.vuelo.collect(v: Vuelo | v.duracion)
+    inv: self.vuelo.collect(duracion)
+
+
+context LineaAerea
+    inv: self.vuelos->forAll( v, w: Vuelo |
+    v <> w implies v.id <> w.id)
+    context Aeropuerto
+    inv: self.vuelosSalida->forAll(horaSalida.hour>6)
+
+
+context Companhia
+    inv: self.vuelos.origen->exists(o:Origen | o.id = 'LEVD')
+
+context Aeropuerto
+    inv:self.vuelos.salida->exists(hour=12)
+
+context Persona
+    inv: Persona.allInstances() -> forAll(p | p.padres -> size() <= 2)
+    
+context Persona
+    inv: self.padres  -> collect(hermanos) -> notEmpty()
+
+context Persona
+    inv: self.padres ->size() <= 2
+
+context Persona
+    inv: self.padres.hermanos -> notEmpty()
+
+context Aeropuerto
+    inv: Aeropuerto.allInstances() -> forAll(a |
+    a <> self implies a.id <> self.id)
+
+context GuitarraClasica
+    inv: self.cuerdas->
+    forAll(c|c.oclIsTypeOf(CuerdaPlastico))
+
+context GuitarraElectrica
+    inv: self.cuerdas->
+    forAll(c|c.oclIsTypeOf(CuerdaMetal))
+
+context Persona
+    inv: self.hipoteca.aval.duenho = self
+
+context Venta
+    inv: self.pagoContado->isEmpty() or
+    self.pagoaPlazos->isEmpty()
+
+context Persona
+    inv: self.proyectoGestionado->isEmpty() or self.proyectorealizado->isEmpty()
+
+context Proyecto
+    inv: self.lider->isEmpty() or
+    self.miembro->isEmpty()
+
+context Guitarra
+    inv: self.tipo=TipoGuitarra::clasica implies
+    self.cuerda->
+    forAll(tipo=TipoCuerda::plastico)

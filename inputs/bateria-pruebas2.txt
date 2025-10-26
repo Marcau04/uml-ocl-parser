@@ -1,0 +1,55 @@
+-- 1. Ningún producto con oferta en vigor en su categoría tiene oferta en vigor
+context Producto
+	inv: self.categoria.ofertaEnVigor -> notEmpty() implies
+	self.ofertaEnVigor -> isEmpty()
+
+-- 2. Toda devolucion realizada sobre un pedido pagado con tarjeta se realizo sobre la misma tarjeta
+context Devolucion	
+	inv: (self.pedido.formaPago -> notEmpty() and self.pedido.formaPago.oclIsTypeOf(PagoTarjeta))
+	implies self.tarjeta = self.pedido.formaPago.tarjeta
+
+-- 3. Los cupones son válidos desde el día posterior a su creacion hasta treinta días después.
+-- De haber sido usados, ha sido entre estas fechas.
+context CuponDescuento
+	inv: self.usado -> notEmpty()
+	implies (self.finValidez.after(self.usado.fecha)
+	and self.inicioValidez.before(self.usado.fecha))
+
+	inv: self.inicioValidez = self.generado.fecha.plusDays(1)
+
+	inv: self.finValidez = self.inicioValidez.plusDays(30) 
+	
+-- 4. El importe de la factura es igual al total del Albarán y al mismo tiempo es igual a la suma
+-- de los importes sin iva más el iva de cada uno de los tipos
+context Factura
+	inv: self.importe = self.albaran.totalAlbaran and
+	self.importe.centimos = ((self.ivaFactura.importeSinIva.centimos -> sum())
+	+ (self.ivaFactura.importeIVA.centimos -> sum()))
+
+-- 5. El  descuento de una linea de un carro corresponde al calculado con la oferta en vigor
+-- de su correspondiente producto o categoría (No es necesario repetir la expresion 1)
+context LineaCarro
+	inv: (self.producto.ofertaEnVigor -> notEmpty() 
+	and self.cantidad >= self.producto.ofertaEnVigor.minimoProductos) 
+	implies self.descuento.centimos = (self.producto.ofertaEnVigor.porcentaje / 100)
+	* self.importe.centimos
+
+	inv: self.producto.categoria.ofertaEnVigor -> notEmpty()
+	implies self.descuento.centimos = (self.producto.categoria.ofertaEnVigor.porcentaje / 100)
+	* self.importe.centimos
+	
+-- valida() es una funcion booleana definida en Fecha
+context Persona::ingresos(d:Fecha):Integer
+	pre: d.valida()
+
+-- valida() es una funcion booleana definida en Fecha
+context Persona::ingresos(d:Fecha):Integer
+	pre: d.valida()
+
+-- valida() es una funcion booleana definida en Fecha
+context Persona::ingresos(d:Fecha):Integer
+	post: d.valida()
+
+-- valida() es una funcion booleana definida en Fecha
+context Persona::ingresos(d:Fecha):Integer
+	post: d.valida()

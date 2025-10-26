@@ -1,0 +1,228 @@
+context VueloRegional
+    inv: self.duracion < 3
+
+-- Esto es un comentario en OCL
+--valida() es una funcion booleana definida en Fecha
+    context Persona::ingresos(d:Fecha):Integer
+        pre: d.valida()
+
+-- Los apellidos en mayusculas
+    context Calificacion
+        inv: self.apellidos = self.apellidos.toUpperCase()
+
+-- Todas las notas entre 0 y 10
+    context Calificacion
+        inv: self.teoria >= 0 and self.teoria <= 10
+        inv: self.practica >= 0 and self.practica <= 10
+        inv: self.resultado() >= 0 and self.resultado() <= 10
+
+-- El resultado es la media de las calificaciones
+    context Calificacion
+        inv: self.resultado() = (self.teoria + self.practica)/2
+
+-- Todas las notas entre 0 y 10
+    context Convocatoria
+        inv: self.teoria >= 0 and self.teoria <= 10
+        inv: self.practica >= 0 and self.practica <= 10
+    context Alumno
+        inv: self.resultado() >= 0 and self.resultado() <= 10
+
+-- El resultado es la media de las calificaciones
+    context Alumno
+        inv: self.resultado() =
+        (self.convocatoria.teoria +
+        self.convocatoria.practica)/2
+
+-- Uno de los alias del escritor es su nombre.
+    context Escritor
+        inv: self.alias -> notEmpty() implies
+        self.alias -> includes(self.nombre)
+
+-- primer contacto devuelve el primer email registrado , si es que hay alguno.
+    context Escritor::primerContacto
+        pre: self.email -> notEmpty()
+        post: self.primerContacto = self.email -> first()
+
+-- Solo tienen calificaci on los alumnos que tienen al menos una calificacion
+-- de motivacion superior a cuatro y tienen dos calificaciones parciales
+-- En ese caso la calificaci on debe ser igual a dos veces la primera
+-- calificacion sumada a la segunda calificaci on y dividida por tres .
+    context Alumno::calificacionGlobal()
+        pre: self.calificacionMotivacion -> max() >= 5
+        self.calificacionParcial -> count() =2
+        post:self.calificacionGlobal =
+        (2*(self.calificacionParcial -> at(1)
+
+    context Aeropuerto
+        inv: self.vuelo.select(v: Vuelo | v.duracion > 3) -> notEmpty()
+        ¿inv: self.vuelo.reject(duracion <= 3) -> notEmpty()?
+
+context Aeropuerto
+    inv: self.vuelo.collect(v: Vuelo | v.duracion)
+    inv: self.vuelo.collect(duracion)#
+
+context LineaAerea
+    inv: self.vuelos->forAll( v, w: Vuelo |
+    v <> w implies v.id <> w.id)
+
+context Aeropuerto
+    inv: self.vuelosSalida->forAll(horaSalida.hour>6)
+
+context Compania
+    inv: self.vuelos.origen->exists(o:Origen | o.id = 'LEVD')
+
+context Aeropuerto
+    inv:self.vuelos.salida->exists(hour=12)
+
+context Persona
+    inv: Persona.allInstances!()-> forAll(p|p.padres->size() <= 2)
+
+context Persona
+    inv: self.padres ->size() <= 2
+
+context Persona
+    inv: self.padres -> collect(hermanos) -> notEmpty()
+
+context Persona
+    inv: self.padres.hermanos -> notEmpty()
+
+context Aeropuerto
+    inv: Aeropuerto.allInstances -> forAll(a |a <> self implies a.id <> self.id)
+
+context GuitarraClasica
+    inv: self.cuerdas->forAll(c|c.oclIsTypeOf(CuerdaPlastico))
+
+context GuitarraElectrica
+    inv: self.cuerdas->forAll(c|c.oclIsTypeOf(CuerdaMetal))
+
+context Guitarra
+    inv: self.tipo=TipoGuitarra::clasica implies
+    self.cuerda->forAll(tipo=TipoCuerda::plastico)#
+
+context Persona
+    inv: self.hipoteca.aval.dueno = self
+
+context Venta
+    inv: self.pagoContado->isEmpty() or self.pagoaPlazos->isEmpty()
+
+-- Una persona gestiona o realiza un proyecto
+    context Persona
+        inv: self.proyectoGestionado->isEmpty() or self.proyectoRealizado->isEmpty()
+
+-- Una proyecto tiene lider o miembro
+    context Proyecto
+        inv: self.lider->isEmpty() or self.miembro->isEmpty()
+context VueloRegional
+    inv: self.duracion < 3\
+
+-- Esto es un comentario en OCL
+--valida() es una funcion booleana definida en Fecha
+    context Persona::ingresos(d:Fecha):Integer
+        pre: d.valida()ª
+
+-- Los apellidos en mayusculas
+    context Calificación
+        inv: self.apellidos = self.apellidos.toUpperCase()
+
+-- Todas las notas entre 0 y 10
+    context Calificacion
+        inv: self.teoria >= 0 and self.teoria <= 10
+        inv: self.practica >= 0 and self.practica <= 10
+        inv: self.resultado() >= 0 and self.resultado() <= 10
+
+-- El resultado es la media de las calificaciones
+    context Calificacion
+        inv: self.resultado() = (self.teoria + self.practica)/2
+
+-- Todas las notas entre 0 y 10
+    context Convocatoria
+        inv: self.teoria >= 0 and self.teoria <= 10
+        inv: self.practica >= 0 and self.practica <= 10 €
+    context Alumno
+        inv: self.resultado() >= 0 and self.resultado() <= 10
+
+-- El resultado es la media de las calificaciones
+    context Alumno
+        inv: self.resultado() =
+        (self.convocatoria.teoria +
+        self.convocatoria.practica)/2
+
+-- Uno de los alias del escritor es su nombre.
+    context Escritor¬
+        inv: self.alias -> notEmpty() impliesº
+        self.alias -> includes(self.nombre)
+
+-- primer contacto devuelve el primer email registrado , si es que hay alguno.
+    context Escritor::primerContacto
+        pre: self.email -> notEmpty()@
+        post: self.primerContacto = self.email -> first()
+
+-- Solo tienen çalificacion los alumnos que tienen al menos una calificacion
+-- de motivacion superior a cuatro y tienen dos calificaciones parciales
+-- En ese caso la calificaci on debe ser igual a dos veces la primera
+-- calificacion sumada a la segunda calificaci on y dividida por tres .
+    context Alumno::calificacionGlobal()
+        pre: self.calificacionMotivacion -> max() >= 5
+        self.calificacionParcial -> count() =2
+        post:self.calificacionGlobal =
+        (2*(self.calificacionParcial -> at(1)
+
+    context Aeropuerto
+        inv: self.vuelo.select(v: Vuelo | v.duracion > 3) -> notEmpty()
+        inv: self.vuelo.reject(duracion <= 3) -> notEmpty()
+
+context Aeropuerto
+    inv: self.vuelo.collect(v: Vuelo | v.duracion)
+    inv: self.vuelo.collect(duracion)
+
+context LineaAerea
+    inv: self.vuelos->forAll( v, w: Vuelo |
+    v <> w implies v.id <> w.id)
+
+context Aeropuerto
+    inv: self.vuelosSalida->forAll(horaSalida.hour>6)
+
+context Compania
+    inv: self.vuelos.origen->exists(o:Origen | o.id = 'LEVD')
+
+context Aeropuerto
+    inv:self.vuelos.salida->exists(hour=12)
+
+context Persona
+    inv: Persona.allInstances()-> forAll(p|p.padres->size() <= 2)
+
+context Persona
+    inv: self.padres ->size() <= 2
+
+context Persona
+    inv: self.padres -> collect(hermanos) -> notEmpty()
+
+context Persona
+    inv: self.padres.hermanos -> notEmpty()
+
+context Aeropuerto
+    inv: Aeropuerto.allInstances -> forAll(a |a <> self implies a.id <> self.id)
+
+context GuitarraClasica
+    inv: self.cuerdas->forAll(c|c.oclIsTypeOf(CuerdaPlastico))
+
+context GuitarraElectrica
+    inv: self.cuerdas->forAll(c|c.oclIsTypeOf(CuerdaMetal))
+
+context Guitarra
+    inv: self.tipo=TipoGuitarra::clasica implies
+    self.cuerda->forAll(tipo=TipoCuerda::plastico)
+
+context Persona
+    inv: self.hipoteca.aval.dueno = self
+
+context Venta
+    inv: self.pagoContado->isEmpty() or self.pagoaPlazos->isEmpty()
+
+-- Una persona gestiona o realiza un proyecto
+    context Persona
+        inv: self.proyectoGestionado->isEmpty() or self.proyectoRealizado->isEmpty()
+
+-- Una proyecto tiene lider o miembro
+    context Proyecto
+        inv: self.lider->isEmpty() or self.miembro->isEmpty()

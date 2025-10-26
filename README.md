@@ -68,9 +68,7 @@ Ejemplo:
 
 ## 🧪 Archivos de prueba
 
-El proyecto incluye 10 archivos de entrada ubicados en la carpeta inputs/:
-
-- 6 archivos oficiales proporcionados por la asignatura (para pruebas sintácticas).
+El proyecto incluye 4 archivos de entrada ubicados en la carpeta inputs/:
 
 - 3 archivos válidos adicionales, creados para verificar casos correctos.
 

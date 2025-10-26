@@ -84,7 +84,13 @@ El proyecto incluye 4 archivos de entrada ubicados en la carpeta inputs/:
 
 **3.** Si se detectan más de 10 errores sintácticos, el análisis se detiene.
 
-**4.** Si no hay errores, se muestra que el archivo OCL es sintácticamente correcto y apto para una fase semántica posterior.
+**4.** Si no hay 10 errores, se muestra la siguiente información de cada clase:
+  - Nombre de la clase
+  - Numero de invariantes en la clase
+  - Numero de Operaciones sobre colecciones en los invariantes
+  - Por cada operación:
+    - Nombre de la operación
+    - Numero de Operaciones sobre colecciones en la especificacion
 
 ---
 
